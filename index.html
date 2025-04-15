@@ -15,21 +15,60 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
+  padding: 20px;
 }
 
-h1 {
-  color: white;
-  font-size: 3rem;
-  z-index: 10;
-  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+.heart-wrapper {
+  position: relative;
+  width: 250px;
+  height: 220px;
+  background: #00f0ff;
+  transform: rotate(-45deg);
   animation: pulse 3s infinite;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+}
+
+.heart-wrapper::before,
+.heart-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 220px;
+  background: #00f0ff;
+  border-radius: 50%;
+}
+
+.heart-wrapper::before {
+  top: -125px;
+  left: 0;
+}
+
+.heart-wrapper::after {
+  left: 125px;
+  top: 0;
+}
+
+.heart-text {
+  transform: rotate(45deg);
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 30px;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  text-shadow: 0 0 10px #fff;
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.85; }
+  0%, 100% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.05) rotate(-45deg); }
 }
 
 .heart-container {
@@ -83,10 +122,28 @@ h1 {
   }
 }
 
+@media (max-width: 400px) {
+  .heart-wrapper {
+    width: 180px;
+    height: 160px;
+  }
+  .heart-wrapper::before,
+  .heart-wrapper::after {
+    width: 180px;
+    height: 160px;
+  }
+  .heart-wrapper::after { left: 90px; }
+  .heart-text {
+    font-size: 1.1rem;
+  }
+}
+
   </style>
 </head>
 <body>
-  <h1>I Love You From Adittt</h1>
+  <div class="heart-wrapper">
+    <div class="heart-text">I Love You<br>From Adittt</div>
+  </div>
   <audio autoplay loop>
     <source src="love.mp3" type="audio/mpeg">
   </audio>
@@ -116,4 +173,4 @@ document.addEventListener('touchmove', (e) => {
 
   </script>
 </body>
-  </html>
+</html>
